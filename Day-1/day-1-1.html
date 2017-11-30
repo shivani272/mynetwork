@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Bhumi</title>
+    <style>
+    .taskdone
+    {
+        text-decoration: line-through;
+    }
+    </style>
+</head>
+<body>
+<div ng-app="shoppingList">
+    <div ng-controller="mainList as ml">
+        <button ng-click="ml.showForm=true">Add New Item</button>
+        <form ng-show="ml.showForm">
+            <input type="text" ng-model=item.title>
+            <input type="text" ng-model="item.description">
+            <input type="text" ng-model="item.quantity">
+            <button ng-click="ml.addItem(item)">Add</button>
+        </form>
+        <table ng-show="ml.shoppingList.length">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in ml.shoppingList" ng-class="{taskdone:item.status==true}">
+                    <td ng-class="{taskdone:item.status==true}">{{item.title}}</td>
+                    <td ng-class="{taskdone:item.status==true}">{{item.description}}</td>
+                    <td ng-class="{taskdone:item.status==true}">{{item.quantity}}</td>
+                    <td><input type="checkbox" ng-click="" ng-model="item.status"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> 
+</body>
+<script src="angular.min.js"></script>
+<script>
+(function(){
+angular.module("shoppingList",[]);
+var mainList= "mainList";
+angular.module("shoppingList").controller("mainList",function(){
+var self = this;
+self.shoppingList= [];
+self.showForm=false;
+self.addItem=function (item) {
+    var newItem=[];
+    angular.copy(item,newItem)
+    self.shoppingList.push(newItem);
+    self.showForm=false;
+}
+})
+})()
+</script>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Bhumi</title>
+</head>
+<body >
+    <div ng-app="myModule" ng-init="wb='Hello World'"> 
+        <!-- <button ng-click="show=true">Show</button>
+        <button ng-click="show=''">Hide</button>
+        <p ng-show="show">{{wb}}</p> -->
+        <div ng-controller="myController1">
+            name:-{{name}}
+            address:-{{address}}
+        </div>
+        <div ng-controller="myController1">
+            <div ng-controller="myController2">
+                inside both controller 
+                <p>name:-{{name}}  address:-{{address}}</p>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="angular.min.js"></script>
+<script>
+
+        var app=angular.module("myModule",[]);
+        app.controller("myController1",function($scope){
+            $scope.name="Shivni";
+        });
+        app.controller("myController2",function($scope){
+            $scope.address="Indore";
+            $scope.name="Mayank";
+        });
+    
+</script>
+</html>
