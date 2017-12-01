@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <style>
+    .taskdone
+    {
+        text-decoration: line-through;
+    }
+    </style>
+</head>
+<body>
+<div ng-app="shoppingList">
+    <div ng-controller="mainList as ml">
+        <button ng-click="ml.showForm=true">Add New Item</button>
+        <form ng-show="ml.showForm">
+             Name:<input type="text" ng-model="item.title">
+           Description: <input type="text" ng-model="item.description">
+            Quantity:<input type="text" ng-model="item.quantity">
+            <button ng-click="ml.addItem(item)">Add</button>
+        </form>
+        <table ng-show="ml.shoppingList.length">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in ml.shoppingList" ng-class="{taskdone:item.status==true}">
+                   <td ng-class="{taskdone:item.status==true}" ng-hide="ml.edit">{{item.title}}</td>
+                    <td><input type="text" ng-model="item.title" ng-show="ml.edit"></td>
+                    <td ng-class="{taskdone:item.status==true}" ng-hide="ml.edit">{{item.description}}</td>
+                    <td><input type="text" ng-model="item.description" ng-show="ml.edit"></td>
+                    <td ng-class="{taskdone:item.status==true}" ng-hide="ml.edit">{{item.quantity}}</td>
+                     <td><input type="text" ng-model="item.quantity" ng-show="ml.edit"></td>
+                    <td><input type="checkbox" ng-click="" ng-model="item.status"></td>
+                    <td><button ng-hide="ml.edit" ng-click="ml.editClicked();">Edit</button></td>
+                    <td><button ng-show="ml.edit" ng-click="ml.saveClicked();">Save</button></td>
+                    <td><button ng-click="ml.deleteClicked(item);">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> 
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script>
+(function(){
+angular.module("shoppingList",[]);
+var mainList= "mainList";
+angular.module("shoppingList").controller("mainList",function(){
+var self = this;
+self.shoppingList= [];
+self.editClicked=function(){
+	self.edit=true;
+	
+	}
+self.saveClicked=function(){
+	self.edit=false;
+	self.save=true;
+	}	
+self.deleteClicked=function(item){
+	self.shoppingList.splice(self.shoppingList.indexOf(item),1);
+	}	
+	
+	
+self.showForm=false;
+self.addItem=function (item) {
+    var newItem=[];
+    angular.copy(item,newItem)
+    self.shoppingList.push(newItem);
+    self.showForm=false;
+}
+})
+})()
+</script>
+</html>
