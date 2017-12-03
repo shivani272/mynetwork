@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="shoppingList">
+        <div ng-controller="mainList as ml" ng-init="name='web bhumi'">
+            <button ng-click="ml.showForm=true">Add New Item</button>
+            <entry-form ng-show="ml.showForm"></entry-form>
+            <table-Data ng-show="ml.shoppingList.length"></table-Data>
+            
+
+        </div>
+    </div>
+</body>
+<script src="../angular.min.js"></script>
+<script src="script.js"></script>
+</html>
