@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Bhumi</title>
+</head>
+<body>
+    <div ng-app="myModule" ng-controller="testController">
+        <label>For 2 way <input type="text" ng-model="for2way"></label>
+        <label>For 1 way <input type="text" ng-model="for1way"></label>
+        <test-dir twoway="for2way" oneway="for1way" str="'Mayank'" fun="functionn()"></test-dir>
+
+    </div>
+</body>
+<script src="../angular.min.js"></script>
+<script>
+    angular.module("myModule",[]);
+    angular.module("myModule").directive("testDir",function()
+    {
+        return {
+            template:"<h1 ng-click=fun()>{{str}}</h1>\
+            <input type=\"text\" ng-model=\"twoway\">\
+            <input type=\"text\" ng-model=\"oneway\">",
+        scope : {
+            twoway:"=",
+            str:"@",
+            fun:"&",
+            oneway:"<"
+        }
+        }
+    });
+
+    angular.module("myModule").controller("testController",function($scope){
+        $scope.functionn= function()
+        {
+            console.log("test msg");
+        }
+        $scope.for2way="Web Bhumi";
+        $scope.for1way="Mayank";
+    })
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Bhumi</title>
+</head>
+<body>
+    <div ng-app="myModule">
+        <test id="a"></test>
+        <test></test>
+    </div>
+</body>
+<script src="angular.min.js"></script>
+<script>
+    (function (ang) {
+        ang.module("myModule",[]);
+        ang.module("myModule").directive("test",function(){
+            var link = function (scope,element,atter) {
+                console.log(element);
+                element.addClass("tutu");
+                element.after("tutu");
+                console.log(atter);
+                element.text("hiiiiiiii");
+            };
+         return {
+             link:link
+         }   
+        })
+    })(window.angular)
+</script>
+</html>
