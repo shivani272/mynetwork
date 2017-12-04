@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    .taskdone
+    {
+        text-decoration: line-through;
+    }
+    </style>
+</head>
+<body>
+<div ng-app="shoppingList">
+    <div ng-controller="mainList as ml">
+        <button ng-click="ml.showForm=true">Add New Item</button>
+        <form></form>
+       <table-data list="ml.shoppingList"></table-data>
+      
+       
+    </div>
+</div> 
+</body>
+<script src="angular.js"></script>
+<script src="underscore.js"></script>
+<script src="script.js">
+
+</script>
+</html>
