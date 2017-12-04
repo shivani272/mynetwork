@@ -1,0 +1,25 @@
+<table >
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in list" ng-class="{taskdone:item.status==true}">
+           <td ng-class="{taskdone:item.status==true}" ng-hide="ml.edit">{{item.title}}</td>
+            <td><input type="text" ng-model="item.title" ng-show="ml.edit"></td>
+            <td ng-class="{taskdone:item.status==true}" ng-hide="ml.edit">{{item.description}}</td>
+            <td><input type="text" ng-model="item.description" ng-show="ml.edit"></td>
+            <td ng-class="{taskdone:item.status==true}" ng-hide="ml.edit">{{item.quantity}}</td>
+             <td><input type="text" ng-model="item.quantity" ng-show="ml.edit"></td>
+            <td><input type="checkbox" ng-click="addnew(item)" ng-model="item.status"></td>
+            <td><button ng-hide="ml.edit" ng-click="ml.editClicked();">Edit</button></td>
+            <td><button ng-show="ml.edit" ng-click="ml.saveClicked();">Save</button></td>
+            <td><button ng-click="ml.deleteClicked(item);">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
