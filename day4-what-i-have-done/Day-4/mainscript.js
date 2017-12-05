@@ -8,7 +8,15 @@ self.completeListAdd =function (item) {
     self.completedList.push(item);   
 }
 self.editClicked=function(item){
-	self.edit=true;
+
+    if(item.edit==true)
+    {
+        item.edit=false;
+    }
+    else
+    {
+        item.edit=true;
+    }
 
 	}
 self.saveClicked=function(){
