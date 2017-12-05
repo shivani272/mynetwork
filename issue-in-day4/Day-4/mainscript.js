@@ -3,6 +3,11 @@
    angular.module("shoppingList").controller("mainList",function(){
 var self = this;
 self.shoppingList= [];
+self.completedList=[];
+self.completeListAdd =function (item) {
+    self.completedList.push(item);
+    console.log(self.completedList)
+}
 self.editClicked=function(){
 	self.edit=true;
 
@@ -36,6 +41,12 @@ angular.module("shoppingList").directive("entryForm",function () {
 })
     angular.module("shoppingList").directive("tableData",function()
     {
-     return {  templateUrl:"table.html"};
+     return {
+         templateUrl:"table.html",
+         scope:{ 
+             list: "=",
+             addnew:"&"
+         }
+    };
     })
 
