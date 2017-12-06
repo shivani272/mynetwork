@@ -59,7 +59,8 @@ angular.module("shoppingList").directive("entryForm",function () {
              list: "=",
              addnew:"&",
              deleteItem:"&",
-             editItem:"&"
+             editItem:"&",
+             clas:"@"
     
          }
     };
