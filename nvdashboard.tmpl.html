@@ -1,0 +1,481 @@
+<style type="text/css">
+    .nvdashboard {
+        overflow: auto;
+        height: calc(100vh - 160px);
+    }
+    
+ </style>
+<div class="layout-fill " >
+    <md-subheader class="jcp-subheader md-subheadergrey md-no-sticky" style="background: #fff;">
+        <div layout="row" layout-xs="column" class="cm-dashboard-header" layout-align="space-between center">
+            <div flex></div>
+            <md-button class="md-icon-button" aria-label="filter" title="Filter" ng-click="vm.showMenu();">
+                <md-icon md-font-icon="zmdi zmdi-filter-list"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="help" title="Help">
+                <md-icon md-font-icon="zmdi zmdi-widgets"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="share" title="Share" ng-disabled="true">
+                <md-icon md-font-icon="zmdi zmdi-share " ng-disabled="disabled"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Print" title="Print" ng-disabled="true">
+                <md-icon md-font-icon="zmdi zmdi-print" ng-disabled="disabled"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Download" title="Download" ng-click="vm.downloadNhqDashBoardReport();">
+                <md-icon md-font-icon="zmdi zmdi-download"></md-icon>
+            </md-button>
+        </div>
+    </md-subheader>
+    <div class="nvdashboard custom-nv-wrapper">
+        <md-content>
+            <div class="layout-row layout-wrap">
+                <div class="flex">
+                    <md-card class="padding-5">
+                        <md-card-header class="padding-0 padding-left-5 padding-top-10">
+                            <md-card-header-text>
+                                <span class="md-subhead  font-size-1 " style=" font-weight: bold;" id="wigdet-header-nv">Download Speed</span>
+                                <span class="md-title font-weight-500" ng-bind="vm.nvData.lastValueDl+ ' Mbps'"></span>
+                            </md-card-header-text>
+                            <md-button class="md-icon-button expand-btn" aria-label="help" title="expand" ng-click="vm.expandedView($event , 'DOWNLOAD_SPEED');">
+                                <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                            </md-button>
+                        </md-card-header>
+                        <md-card-content>
+                            <highchart config="vm.chartConfigDownloadSpeed" style="min-width: 200px;max-height:170; "></highchart>
+                        </md-card-content>
+                    </md-card>
+                </div>
+                <div class="flex">
+                    <md-card class="padding-5">
+                        <md-card-header class="padding-0 padding-left-5 padding-top-10">
+                            <md-card-header-text>
+                                <span class="font-size-1 md-subhead " id="wigdet-header-nv">Upload Speed</span>
+                                <span class="md-title font-weight-500" ng-bind="vm.nvData.lastValueUl+' Mbps'"></span>
+                            </md-card-header-text>
+                            <md-button class="md-icon-button expand-btn" aria-label="help" title="expand" ng-click="vm.expandedView($event , 'UPLOAD_SPEED');">
+                                <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                            </md-button>
+                        </md-card-header>
+                        <md-card-content>
+                            <highchart config="vm.chartConfigUploadSpeed" style="min-width: 200px; width: 100%; "></highchart>
+                        </md-card-content>
+                    </md-card>
+                </div>
+                <div class="flex">
+                    <md-card class="padding-5">
+                        <md-card-header class="padding-0 padding-left-5 padding-top-10">
+                            <md-card-header-text>
+                                <span class="md-subhead font-size-1" id="wigdet-header-nv">Signal Strength</span>
+                                <span class="md-title font-weight-500" ng-bind="vm.nvData.lastValueSignal+' dBm'"></span>
+                            </md-card-header-text>
+                            <md-button class="md-icon-button expand-btn" aria-label="help" title="expand" ng-click="vm.expandedView($event , 'SIGNAL_STRENGTH');">
+                                <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                            </md-button>
+                        </md-card-header>
+                        <md-card-content class="pl-0">
+                            <highchart config="vm.chartConfigSignalstrength" ></highchart>
+                        </md-card-content>
+                    </md-card>
+                </div>
+                <div class="flex">
+                    <md-card class="padding-5">
+                        <md-card-header class="padding-0 padding-left-5 padding-top-10">
+                            <md-card-header-text>
+                                <span class="md-subhead font-size-1" id="wigdet-header-nv">Quality</span>
+                                <span class="md-title font-weight-500" ng-bind="vm.nvData.lastValueQuality+' dB'"></span>
+                            </md-card-header-text>
+                            <md-button class="md-icon-button expand-btn" aria-label="help" title="expand" ng-click="vm.expandedView($event , 'QUALITY');">
+                                <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                            </md-button>
+                        </md-card-header>
+                        <md-card-content>
+                            <highchart config="vm.chartConfigQuality"></highchart>
+                        </md-card-content>
+                    </md-card>
+                </div>
+                <div class="flex">
+                    <md-card class="padding-5">
+                        <md-card-header class="padding-0 padding-left-5 padding-top-10">
+                            <md-card-header-text>
+                                <span class="md-subhead font-size-1" id="wigdet-header-nv">SINR</span>
+                                <span class="md-title font-weight-500" ng-bind="vm.nvData.lastValueSinr+' dB'"></span>
+                            </md-card-header-text>
+                            <md-button class="md-icon-button expand-btn" aria-label="help" title="expand" ng-click="vm.expandedView($event , 'SINR');">
+                                <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                            </md-button>
+                        </md-card-header>
+                        <md-card-content>
+                            <highchart config="vm.chartConfigSINR"></highchart>
+                        </md-card-content>
+                    </md-card>
+                    </md-card>
+                </div>
+            </div>
+            <div class="layout-row layout-wrap">
+                <div class="flex-50">
+                    <div class="layout-row layout-wrap flex-100">
+                        <div class="flex-100">
+                            <md-card class="padding-5">
+                                <md-card-header class="padding-0 padding-left-5 padding-top-10">
+                                    <md-card-header-text>
+                                        <span class="md-subhead font-size-down">Consumer and Enterprise</span>
+                                    </md-card-header-text>
+                                    <!-- <md-button class="md-icon-button expand-btn" aria-label="help" title="expand" ng-click="vm.expandedView('liveuser');">
+                                        <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                                    </md-button> -->
+                                </md-card-header>
+                                <md-card-content>
+                                    <highchart config="vm.chartLiveUser"></highchart>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+                        <div flex></div>
+                        <div class="flex-100">
+                            <md-card>
+                                <div>
+                                    <!-- <md-card-header class="padding-0 padding-left-5 ">
+                                        <md-card-header-text>
+                                            <span class="md-subhead font-size-down">  </span>
+                                        </md-card-header-text>
+                                        <md-button class="md-icon-button " aria-label="help" title="expand" ng-click="vm.expandedView('totalusers');">
+                                            <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                                        </md-button>
+                                    </md-card-header> -->
+
+                                    <md-content layout="row" class="white-bg">
+                                        <div flex="12">
+                                            <md-input-container class=" total-user-custom">
+                                                <span class="md-subhead font-size-1" id="wigdet-header-nv">Total User</span>
+                                                <div flex></div>
+                                                <span class="md-title font-weight-500 user-line-height" ng-bind="vm.nvData.totalUser"></span>
+                                            </md-input-container>
+                                        </div>
+                                        <div flex="25">
+                                            <highchart config="vm.chartUserSegment"></highchart>
+                                        </div>
+                                        <div flex>
+                                            <highchart config="vm.chartPassiveSample"></highchart>
+                                        </div>
+                                        <div flex="25">
+                                            <highchart config="vm.chartOperatingSystem"></highchart>
+                                        </div>
+                                    </md-content>
+                                </div>
+                            </md-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-50">
+
+                    <md-card class="padding-5 top-location-height ">
+                        <md-card-header class="padding-0 padding-left-5 padding-top-10 pb-10">
+                            <div layout="row">
+                                <div flex="25"> <span class="md-subhead font-size-top-loc">Top Location</span> </div>
+                                <div flex>
+                                    <form layout="row" layout-align="end start">
+                                        <!--<div flex="15"> <span>Filter By</span> </div>-->
+
+
+                                        <div flex class="custom-radio-btn">
+                                            <md-radio-group layout="row" ng-model="data.group1">
+                                                <md-radio-button ng-change="vm.getNVTopSevenData();" ng-model ="vm.nvData.TopLocKpi"  value="avgDlRate" flex="100">Download Throughput</md-radio-button>
+                                                <md-radio-button ng-change="vm.getNVTopSevenData();" ng-model ="vm.nvData.TopLocKpi"  value="totalUC"> Users </md-radio-button>
+                                                <md-radio-button ng-change="vm.getNVTopSevenData();" ng-model ="vm.nvData.TopLocKpi"  value="signalStrength">Signal Strength</md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <!-- <md-button class="md-icon-button expand-btn" aria-label="help" title="expand" ng-click="vm.expandedView('toplocation');">
+                                <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                            </md-button> -->
+                        </md-card-header>
+                        <leaflet ng-class="[ 'zoom' + vm.center.zoom ]" id="TopLocationmap" lf-center="vm.center" layers="vm.layers" defaults="vm.defaults" width="100%" height="100%"></leaflet>
+                    </md-card>
+                </div>
+            </div>
+            <div class="layout-row layout-wrap">
+                <div class="flex-50">
+                    <md-card class="padding-5 top-location-height">
+                        <md-card-header class="padding-0 padding-left-5 ">
+                            <md-card-header-text>
+                                <!-- <span class="md-subhead font-size-down"> Packet Loss </span> -->
+                            </md-card-header-text>
+                            <md-button class="md-icon-button expand-btn packet-expand-btn" aria-label="help" title="expand" ng-click="vm.expandedView($event , 'PACKET_LOSS');">
+                                <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                            </md-button>
+                        </md-card-header>
+                        <md-content>
+
+                            <highchart class="custom-packet-loss-wrap" config="vm.chartConfigPacketLoss"></highchart>
+                        </md-content>
+                    </md-card>
+                </div>
+                <div class="flex-50">
+                    <div class="layout-row layout-wrap flex-100">
+                        <div class="flex-100">
+                            <md-card class="padding-5">
+                                <md-card-header class="padding-0 padding-left-5 ">
+                                    <md-card-header-text>
+                                        <span class="md-subhead font-size-down">Health Index</span>
+                                        <div flex-50>
+                                            <fieldset class="rating">
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[10]" id="star5" name="rating" value="5" /><label class="full"></label>
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[9]"  id="star4half" name="rating" value="4 and a half" /><label class="half"></label>
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[8]"  id="star4" name="rating" value="4" /><label class="full"></label>
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[7]"  id="star3half" name="rating" value="3 and a half" /><label class="half"></label>
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[6]"  id="star3" name="rating" value="3" /><label class="full"></label>
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[5]"  id="star2half" name="rating" value="2 and a half" /><label class="half"></label>
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[4]"  id="star2" name="rating" value="2" /><label class="full"></label>
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[3]"  id="star1half" name="rating" value="1 and a half" /><label class="half"></label>
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[2]"  id="star1" name="rating" value="1" /><label class="full"></label>
+                                                <input type="radio" ng-checked ="vm.nvData.starChecked[1]"  id="starhalf" name="rating" value="half" /><label class="half"></label>
+                                            </fieldset>
+                                        </div>
+                                        <!--todo-->
+                                    </md-card-header-text>
+                                    <md-button class="md-icon-button" aria-label="help" title="expand" ng-click="vm.expandedView($event , 'HEALTH_INDEX');">
+                                        <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                                    </md-button>
+                                </md-card-header>
+                                <md-card-content class="p-0">
+                                    <highchart config="vm.chartHealthIndex" style="min-width: 250px;"></highchart>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+                        <div flex></div>
+                        <div class="flex-100">
+                            <md-card class="padding-5">
+                                <md-card-header class="padding-0 padding-left-5 ">
+                                    <md-card-header-text>
+                                        <span class="md-subhead font-size-down"> Download Time </span>
+                                    </md-card-header-text>
+                                    <md-button class="md-icon-button expand-btn" aria-label="help" ng-click="vm.expandedView($event , 'DOWNLOAD_TIME');" title="expand">
+                                        <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                                    </md-button>
+                                </md-card-header>
+                                <md-card-content class="p-0-16">
+                                    <div class="layout-row layout-wrap">
+                                        <div class="flex-30 margin-right-25">
+                                            <md-card-content class="p-0">
+                                                <highchart config="vm.chartConfigDownloadTime" style="min-width: 600px; height: 200px;">
+                                                </highchart>
+                                            </md-card-content>
+                                        </div>
+                                    </div>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layout-row layout-wrap"  ng-show="vm.nvData.isCallAnalytics">
+                <div class="flex-100">
+                    <md-card class="padding-5 top-location-height">
+                        <md-card-header class="padding-0 padding-left-5 padding-top-10">
+                            <md-card-header-text>
+                                <span class="md-subhead font-size-down">Call Analytics</span>
+                            </md-card-header-text>
+                            <md-button class="md-icon-button expand-btn" aria-label="help" title="expand" ng-click="vm.expandedView('callanalytics');">
+                                <md-icon md-font-icon="zmdi zmdi-arrow-right-top expand-icon"></md-icon>
+                            </md-button>
+                        </md-card-header>
+                        <md-content>
+                        </md-content>
+                        <leaflet style="min-height:300px; background: white;" ng-class="[ 'zoom' + vm.center.zoom ]" id="CallAnalytics" lf-center="vm.callAnalyticsCenter" layers="vm.callAnalyticslayers" defaults="vm.callAnalyticsdefaults" width="100%" height="100%"></leaflet>
+                    </md-card>
+                </div>
+            </div>
+        </md-content>
+    </div>
+    <div>
+        <!-- <div class="sidebar-open" ng-hide="vm.MenuOpen" ng-click="vm.showMenu();">
+            <div class="zmdi zmdi-caret-up"></div>
+        </div>
+        <div class="sidebar-closed" ng-show="vm.MenuOpen" ng-click="vm.showMenu();">
+            <div class="zmdi zmdi-caret-down"></div>
+        </div> -->
+        <md-sidenav class="md-sidenav-right md-whiteframe-4dp custom-sidenav custom-sidenav-wrapper" md-component-id="right" md-disable-backdrop md-is-open="false" style="width:330px;max-width:330px;  overflow: hidden;">
+            <div layout="row " ng-if="vm.nvData.enableFilter" class="primary-bg tp-head-wrap">
+                <div flex>
+                    <h2 class="md-headline"> Filter </h2>
+                </div>
+                <md-button class="md-icon-button custom-btn" aria-label="close" title="close">
+                    <md-icon md-font-icon="zmdi zmdi-close " ng-click="vm.showMenu();"></md-icon>
+                </md-button>
+            </div>
+            <md-divider> </md-divider>
+            <div style=" overflow-x: hidden; min-height: 405px;  max-height: 405px;">
+                <div ng-if="vm.enableFilter">
+
+                    <div layout="column " class="form-wrapper">
+<!--
+                        <md-input-container flex>
+-->
+                            <md-autocomplete flex  md-no-cache="true" md-selected-item="vm.nvData.selectedLocation" md-selected-item-change="vm.selectedLocationChanged()"  md-search-text="vm.nvData.search.name" md-search-text-change="vm.locationChange(vm.nvData.search.name);"  md-items="item in vm.nvData.searches"  md-item-text="item" md-floating-label="area/location">
+                                <md-item-template>
+                                    <span md-highlight-text="ctrl.searchText">{{item}}</span>
+                                </md-item-template>
+                            </md-autocomplete>
+                            
+
+<!--
+                        </md-input-container>
+-->
+                        <!-- <div layout="row " class="flex-100">
+                            <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date" class="custom-datepicker flex-50"></md-datepicker>
+                            <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date" class="flex-50"></md-datepicker>
+                        </div> -->
+                        <div layout="row" class="flex-100 cust-date-field">
+                            <span class="cust-date-cal-icon"><i class="zmdi zmdi-calendar"></i></span>
+                            <md-date-range ng-model="vm.nvData.dateRange" placeholder="{{vm.nvData.dateRange}}"></md-date-range>
+                        </div>
+                        <md-input-container flex>
+                            <label>Operator</label>
+                            <md-select ng-model="vm.nvData.operator" ng-change="vm.checkFormValidation()">
+                                <md-option ng-value="item" ng-repeat="item in vm.nvData.operators"> {{item}} </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Technology</label>
+                            <md-select ng-model="vm.nvData.technology" ng-change="vm.checkFormValidation()">
+                                <md-option ng-value="item" ng-repeat="item in vm.nvData.technologies"> {{item}} </md-option>
+                            </md-select>
+                        </md-input-container>
+                         <md-input-container flex>
+                            <label>Band</label>
+                            <md-select ng-model="vm.nvData.band" ng-change="vm.checkFormValidation()">
+                                <md-option ng-value="item" ng-repeat="item in vm.nvData.bands"> {{item}} </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout="row " layout-align="end start">
+                        <md-button ng-click="vm.reset();" class="gray-font no-bg">RESET</md-button>
+                        <md-button ng-disabled="vm.nvData.isApplyDisable" ng-click="vm.apply()" class="md-primary no-bg">APPLY</md-button>
+                    </div>
+                    <div layout="row " class="primary-bg tp-head-wrap">
+                        <div flex>
+                            <h2 class="md-headline"> Recent Applied Filter</h2>
+                        </div>
+                    </div>
+                    <md-content>
+                        <md-list>
+                            <md-list-item class="md-3-line custom-list-wrapper md-whiteframe-1dp">
+                                <md-button class="m-t-25" ng-click="vm.showAppliedfilter();">
+                                    <md-icon md-font-icon=" zmdi zmdi-star yellow "></md-icon>
+                                </md-button>
+                                <div class="md-list-item-text ">
+                                  <h3 ng-bind="vm.nvData.search.name"></h3>
+                                    <p ng-bind="vm.nvData.formatDateView"></p>
+                                </div>
+                                <md-button class="md-secondary ">
+                                    <md-icon md-font-icon="zmdi zmdi-delete "></md-icon>
+                                </md-button>
+                                <md-button class="md-secondary ">
+                                    <md-icon md-font-icon="zmdi zmdi-long-arrow-return custom-return"> </md-icon>
+                                </md-button>
+
+                            </md-list-item>
+                            <md-list-item class="md-3-line custom-list-wrapper md-whiteframe-1dp">
+                                <md-button class="m-t-25" ng-click="vm.showAppliedfilter();">
+                                    <md-icon md-font-icon=" zmdi zmdi-star yellow "></md-icon>
+                                </md-button>
+                                <div class="md-list-item-text ">
+                                   <h3 ng-bind="vm.nvData.search.name"></h3>
+                                    <p ng-bind="vm.nvData.formatDateView"></p>
+                                </div>
+                                <md-button class="md-secondary ">
+                                    <md-icon md-font-icon="zmdi zmdi-delete "></md-icon>
+                                </md-button>
+                                <md-button class="md-secondary ">
+                                    <md-icon md-font-icon="zmdi zmdi-long-arrow-return custom-return"> </md-icon>
+                                </md-button>
+                                <md-divider></md-divider>
+                            </md-list-item>
+                        </md-list>
+                    </md-content>
+                </div>
+                <div ng-if="vm.enableAppliedFilter">
+                    <div layout="row " class="primary-bg tp-head-wrap">
+                        <div flex>
+                            <h2 class="md-headline"> <span>  <md-icon  md-font-icon="zmdi zmdi-arrow-left " ng-click="vm.backtoFilter();" style="cursor: pointer;"></md-icon>  </span> Applied Filter </h2>
+                        </div>
+                        <md-button class="md-icon-button custom-btn" aria-label="close" title="close">
+                            <md-icon md-font-icon="zmdi zmdi-close " ng-click="vm.showMenu();"></md-icon>
+                        </md-button>
+                    </div>
+                    <md-divider> </md-divider>
+                    <div ng-cloak>
+                        <md-content>
+                            <md-tabs md-dynamic-height md-border-bottom>
+                                <md-tab label="Saved">
+                                    <md-content>
+                                        <md-list>
+                                            <md-list-item class="md-3-line custom-list-wrapper md-whiteframe-1dp">
+                                                <md-button class="m-t-25" ng-click="vm.showAppliedfilter();">
+                                                    <md-icon md-font-icon=" zmdi zmdi-star yellow "></md-icon>
+                                                </md-button>
+                                                <div class="md-list-item-text ">
+                                                   <h3 ng-bind="vm.nvData.search.name"></h3>
+													<p ng-bind="vm.nvData.formatDateView"></p>
+                                                </div>
+                                                <md-button class="md-secondary ">
+                                                    <md-icon md-font-icon="zmdi zmdi-delete "></md-icon>
+                                                </md-button>
+                                                <md-button class="md-secondary ">
+                                                    <md-icon md-font-icon="zmdi zmdi-long-arrow-return custom-return"> </md-icon>
+                                                </md-button>
+                                                <md-divider></md-divider>
+                                            </md-list-item>
+                                        </md-list>
+
+                                        <md-list>
+                                            <md-list-item class="md-3-line custom-list-wrapper md-whiteframe-1dp">
+                                                <md-button class="m-t-25">
+                                                    <md-icon md-font-icon=" zmdi zmdi-star yellow "></md-icon>
+                                                </md-button>
+                                                <div class="md-list-item-text ">
+<!--
+                                                    <h3 ng-bind=""> Jakarta, Indonesia/ Indosat /4G LTE </h3>
+-->
+<!--
+                                                    <p> 22 Oct - 30 Oct 2017</p>
+-->
+                                                    <h3 ng-bind="vm.nvData.search.name"></h3>
+													<p ng-bind="vm.nvData.formatDateView"></p>
+                                                </div>
+                                                <md-button class="md-secondary ">
+                                                    <md-icon md-font-icon="zmdi zmdi-delete "></md-icon>
+                                                </md-button>
+                                                <md-button class="md-secondary ">
+                                                    <md-icon md-font-icon="zmdi zmdi-long-arrow-return custom-return"> </md-icon>
+                                                </md-button>
+                                                <md-divider></md-divider>
+                                            </md-list-item>
+                                        </md-list>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Recent" ng-disabled="true">
+                                    <md-content class="md-padding">
+
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
+                        </md-content>
+                    </div>
+                </div>
+            </div>
+            <div class="layout-row layout-wrap flex-100" layout-align="end start">
+                <div layout="row flex-50">
+                    <md-button class="gray-font no-bg" ng-click="vm.showAppliedfilter();">FAVOURITES</md-button>
+                </div>
+                <div layout="row flex-50">
+                    <md-button class="gray-font no-bg">CLEAR ALL</md-button>
+                </div>
+            </div>
+        </md-sidenav>
+    </div>
+</div>
