@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script src="underscore.js"></script>
+    <script>
+    // _.each(["mayank","web bhumi","nirupama","shivani","pratibha"], function (name)
+    // {
+    //     console.log(name);
+    // });
+    var arr=[];
+    var arrObj=[];
+    var obj={ "fdns": {
+        "333_LTE": {
+            "131217": 6.25,
+            "141217": 6.25
+        },
+        "334_AUTO": {
+            "131217": 2.25,
+            "141217": 2.25
+        },
+        "335_AUTO": {
+            "131217": 6.25,
+            "141217": 6.25
+        }
+    }};
+    _.each(obj.fdns,function (name,test,tt,tt2)
+                {
+        //arrObj.push(name);
+        console.log(name);
+        console.log(test);
+        console.log(tt);
+        console.log(tt2);
+        tempArr=[]
+        _.each(name,function(n1){
+            arr.push(n1);
+            tempArr.push(n1);
+            console.log(n1);
+        });
+        arrObj.push(tempArr);
+    });
+
+    console.log(arr);
+    console.log(arrObj);
+    // function printName(name)
+    // {
+    //     console.log(name);
+    // }
+    // ----------------------------------------------------------------------------------------
+//    console.log(_.map([1, 2, 3], function(num){ return num * 3; }));
+    </script>
+</body>
+</html>
+
+
+<script>
+
+    (function(angular){
+        angular.module("myModule",[]);
+    })(window.angular);
+</script>

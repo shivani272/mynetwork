@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body ng-app="myModule" ng-init="hh='asdas'">
+    <check-link t="grgh"></check-link>
+    <check-link></check-link>
+    <check-link></check-link>
+</body>
+<script src="../angular.min.js"></script>
+<script>
+    var app=angular.module("myModule",[]);
+    app.directive("checkLink",function(){
+        return{link: {post:function(a1,a2,a3,a4){
+            console.log(a1.hh);
+            console.log(a2);
+            console.log(a3);
+            console.log(a4);
+        }
+        }}
+    })
+</script>
+</html>
