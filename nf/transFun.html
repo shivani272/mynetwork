@@ -12,31 +12,49 @@
     
     <div ng-app="myModule">
         <div ng-controller="myController">
-            <bb><tt></tt></bb>
+                <tt></tt>
+                <hr>
+            <bb>
+               <tt></tt>
+            </bb>
+            <hr>
+            <tt></tt>
+            
         </div>
+        <hr>
+        
+        <bb>
+            <tt></tt>
+        </bb>
     </div>
 
 
     <script src="../angular.min.js"></script>
     <script>
-    angular.module("myModule",[]).controller("myController",function(){
-
+    angular.module("myModule",[]).controller("myController",function($scope){
+        $scope.number=12345678;
+        $scope.name="Shivani";
     }).directive("tt",function(){
-        return {
-            controller:function()
-            {
-                this.name="tt";
-            }
+        return function(scope,element,atter,ctrl,trans)
+        {   
+            console.log(element);
+            element[0].innerHTML =scope.name+" "+scope.number;
         }
 
     }).directive("bb",function(){
         return {
-            transclude:true,
-            link:function(scope,ele,atter,ctrl,trans)
-        {
+            transclude: true,
+            template:"<ng-transclude></ng-transclude>",
+            link:function(sc,e,a,c,trans)
+            {
+                trans(sc);
+            },
+            controller:function($scope)
+            {
+                $scope.name="Web Bhumi";
+            }
             
-            console.log(trans);
-        }
+        
     }})
     </script>
 </body>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="myModule">
+
+        <div ng-controller="myController">
+        {{name}}
+
+        </div>
+    </div>
+
+    <script src="../angular.min.js"></script>
+
+    <script>
+        var app = angular.module("myModule",[]);
+        function myController(){
+        this.name=data.name;
+        }
+        (function(){
+
+            data={name:"Mayank"};
+            myController.$inject[$scope];
+
+        })();
+        
+
+    app.controller("myController",myController)
+        
+    </script>
+</body>
+</html>
