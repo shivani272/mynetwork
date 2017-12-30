@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body ng-app="myModule">
+
+    <div ng-controller="myController1">
+        {{person.name}}
+        <input type="text" ng-model="person.name">
+    </div>
+    <div ng-controller="myController2">
+        {{person.name}}
+        <input type="text" ng-model="person.name">
+    </div>
+    
+
+    <script src="js/angular.min.js"></script>
+    <script>
+    angular.module("myModule",[]);
+    angular.module("myModule").controller("myController1",function($scope,testService){
+        $scope.name=testService.name;
+        $scope.person=testService.person;
+        
+    });
+    angular.module("myModule").controller("myController2",function($scope,testService){
+        $scope.name=testService.name;
+        $scope.person=testService.person;
+        
+    });
+    angular.module("myModule").service("testService",function(){
+        this.name="shivani";
+        this.person={name:"shivani"};
+    });
+
+    angular.module("myModule").factory("testFactory",function(){
+        (function ()
+        {
+
+        })
+        var t={}
+        t.name="shivani";
+        t.person={name:"shivani"}
+        return t;
+    });
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body ng-app="myModule">
+    <div ng-controller="myController as myc">
+        <input type="text" placeholder="search book" ng-model="myc.searchText">
+        <button type="button" ng-click="myc.search()">Search</button>
+        <div ng-repeat="book in myc.Books">
+            <h3>{{book.Title}}</h3>
+            <img ng-src="{{book.Image}}" alt="">
+            <p>{{book.Description}}</p>
+            <a href="#">Edit</a>
+        </div>
+
+
+    </div>
+    <script src="js/angular.min.js"></script>
+    <script>
+        var app = angular.module("myModule",[]);
+       app.controller("myController",function($http){
+           var that = this;
+           that.search=function(){
+            $http.get("http://it-ebooks-api.info/v1/search/"+that.searchText).then(function(resData){
+               that.Books=resData.data.Books;
+           },function(){})
+           }
+       }) 
+    </script>
+</body>
+</html>
