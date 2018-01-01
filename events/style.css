@@ -1,0 +1,14 @@
+
+
+
+textarea {
+  
+  width: 95%;
+  height: 400px;
+}
+
+div[ng-controller] {
+  margin: 15px;
+  padding: 15px;
+  border: 1px solid red;
+}

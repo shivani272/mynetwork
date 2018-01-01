@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-example43-production</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+  <script src="script.js"></script>
+  
+
+  
+</head>
+<body ng-app="app">
+  <div ng-controller="MainController">
+    <h1>MainController</h1>
+    
+    <div ng-controller="ParentController">
+      <h1>ParentController</h1>
+      <input ng-model="parentData.message" />
+      <button ng-click="broadcastEvent()">broadcast event from ParentController</button>
+      
+      <br><br>
+      
+      <div ng-controller="ChildController">
+      <h1>ChildController</h1>
+        <input ng-model="childData.message" />
+        <button ng-click="emitEvent()">emit event from ChildController</button>
+      </div>
+    </div>
+    
+    <br><br>
+    
+    <h1>LOGS:</h1>
+    <pre><code>{{ mainData.logs }}</code></pre>
+    
+  </div>
+  
+</body>
+</html>
